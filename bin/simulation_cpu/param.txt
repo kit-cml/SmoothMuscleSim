@@ -1,0 +1,12 @@
+user_name = marcell								// User Name that will be used in the file name.
+number_pacing = 1						// Number of paces.
+number_pacing_write = 1       // starting pace number for writing.
+cycle_length = 4000.0				// Time period of one cycle (msec).
+cell_model = Tong	  // Name of the cell model. Refer to the guide to fill it
+stimulus_duration = 0.5								// Duration of stimulus current applied (msec).
+stimulus_amplitude_scale = 1.0				// Scaling factor of stimulus current amplitude.
+solver_type = CVode										// Type of ODE solver used. Only CVode or Euler are available.
+time_step_min = 0.1								// The minimum time step of the computation (msec). Only for CVode solver.
+time_step_max = 0.1								// The maximum time step of the computation (msec). Only for CVode solver.
+writing_step = 1.0								// The interval time to write the result into the file (msec).
+gna_scale = 1.										// The scaling factor of GNa conductance.

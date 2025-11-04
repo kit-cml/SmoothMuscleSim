@@ -1,0 +1,9 @@
+*.csv
+bin/skeletalmusclesim-Shorten
+results/
+*.o
+*.log
+*.out
+*.dat
+*.swp
+*.pid

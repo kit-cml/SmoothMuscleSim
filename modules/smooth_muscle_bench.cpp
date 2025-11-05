@@ -35,7 +35,17 @@ int smooth_muscle_bench(const Parameter *p_param)
   const char *solver_type = p_param->solver_type;
   const double stimulus_duration = p_param->stimulus_duration;
   const double stimulus_amplitude_scale = p_param->stimulus_amplitude_scale;
+  const double gcal_scale = p_param->pca_scale;
+  const double gcat_scale = p_param->gcat_scale;
   const double gna_scale = p_param->gna_scale;
+  const double gh_scale = p_param->gh_scale;
+  const double gk1_scale = p_param->gk1_scale;
+  const double gk2_scale = p_param->gk2_scale;
+  const double gka_scale = p_param->gka_scale;
+  const double gkca_scale = p_param->gkca_scale;
+  const double gb_scale = p_param->gb_scale;
+  const double gcl_scale = p_param->gcl_scale;
+  const double gns_scale = p_param->gns_scale;
 
   if(time_step_min > writing_step){
     mpi_printf(cml::commons::MASTER_NODE,"%s\n%s\n",
@@ -61,7 +71,18 @@ int smooth_muscle_bench(const Parameter *p_param)
   p_cell = new Tong_Choi_Kharche_Holden_Zhang_Taggart_2011();
   p_cell->initConsts();
   
+  // apply user input conductance scale
+  p_cell->CONSTANTS[gcal] *= gcal_scale;
+  p_cell->CONSTANTS[gcat] *= gcat_scale;
   p_cell->CONSTANTS[gna] *= gna_scale;
+  p_cell->CONSTANTS[gh] *= gh_scale;
+  p_cell->CONSTANTS[gk1] *= gk1_scale;
+  p_cell->CONSTANTS[gk2] *= gk2_scale;
+  p_cell->CONSTANTS[gka] *= gka_scale;
+  p_cell->CONSTANTS[gkca] *= gkca_scale;
+  p_cell->CONSTANTS[gb] *= gb_scale;
+  p_cell->CONSTANTS[gcl] *= gcl_scale;
+  p_cell->CONSTANTS[gns] *= gns_scale;
 
   // variables for I/O
   char buffer[255];
@@ -81,8 +102,11 @@ int smooth_muscle_bench(const Parameter *p_param)
     return 1;
   }
   
-  fprintf(fp_time_series,"%s,%s,%s,%s\n",
-      "Time(ms)","v(mV)","dv/dt(mV/ms)","Ist(mV)");
+  fprintf(fp_time_series,"%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
+      "Time(ms)","v(mV)","dv/dt(mV/ms)","cai(mM)","Ist(mV)",
+      "ical(pA_per_pF)","ina(pA_per_pF)","icat(pA_per_pF)","ih(pA_per_pF)",
+      "ik1(pA_per_pF)","ik2(pA_per_pF)","ika(pA_per_pF)","iBKa(pA_per_pF)","iBKab(pA_per_pF)",
+      "ib(pA_per_pF)","insna(pA_per_pF)","insca(pA_per_pF)","insk(pA_per_pF)");
 
   double time_step = time_step_min;
   double tcurr = 0.;
@@ -149,8 +173,11 @@ int smooth_muscle_bench(const Parameter *p_param)
       // relative time since writing began
       tprint = next_output_time - start_time;
       snprintf(buffer, sizeof(buffer),
-          "%.4lf,%.4lf,%.4lf\n",
-          p_cell->STATES[v],p_cell->RATES[v],p_cell->ALGEBRAIC[Ist]);
+          "%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,%.4lf,\n",
+          p_cell->STATES[v],p_cell->RATES[v],p_cell->STATES[cai],p_cell->ALGEBRAIC[Ist],
+          p_cell->ALGEBRAIC[ical],p_cell->ALGEBRAIC[ina],p_cell->ALGEBRAIC[icat],p_cell->ALGEBRAIC[ih],
+          p_cell->ALGEBRAIC[ik1],p_cell->ALGEBRAIC[ik2],p_cell->ALGEBRAIC[ika],p_cell->ALGEBRAIC[iBKa],p_cell->ALGEBRAIC[iBKab],
+          p_cell->ALGEBRAIC[ib],p_cell->ALGEBRAIC[insna],p_cell->ALGEBRAIC[insca],p_cell->ALGEBRAIC[insk]);
       fprintf(fp_time_series, "%.4lf,%s", tprint, buffer);
       // schedule next output
       next_output_time += writing_step;

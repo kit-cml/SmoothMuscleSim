@@ -9,4 +9,15 @@ solver_type = CVode										// Type of ODE solver used. Only CVode or Euler are
 time_step_min = 0.1								// The minimum time step of the computation (msec). Only for CVode solver.
 time_step_max = 0.1								// The maximum time step of the computation (msec). Only for CVode solver.
 writing_step = 1.0								// The interval time to write the result into the file (msec).
-gna_scale = 1.										// The scaling factor of GNa conductance.
+pca_scale = 1.										// The scaling factor of gcal conductance.
+gcat_scale = 1.										// The scaling factor of gcat conductance.
+gna_scale = 1.										// The scaling factor of gna conductance.
+gh_scale = 1.										// The scaling factor of gh conductance.
+gk1_scale = 1.										// The scaling factor of gk1 conductance.
+gk2_scale = 1.										// The scaling factor of gk2 conductance.
+gka_scale = 1.										// The scaling factor of gka conductance.
+gkca_scale = 1.										// The scaling factor of gkca conductance.
+gb_scale = 1.										// The scaling factor of gb conductance.
+gcl_scale = 1.										// The scaling factor of gcl conductance.
+gns_scale = 1.										// The scaling factor of gns conductance.
+

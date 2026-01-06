@@ -1,5 +1,5 @@
 *.csv
-bin/skeletalmusclesim-Shorten
+bin/smoothmusclesim_Tong
 results/
 *.o
 *.log

@@ -71,6 +71,11 @@ int smooth_muscle_bench(const Parameter *p_param)
   p_cell = new Tong_Choi_Kharche_Holden_Zhang_Taggart_2011();
   p_cell->initConsts();
   
+  // apply stimulus protocol from user input
+  p_cell->CONSTANTS[BCL] = cycle_length;
+  p_cell->CONSTANTS[duration] = stimulus_duration;
+  p_cell->CONSTANTS[amp] *= stimulus_amplitude_scale;
+
   // apply user input conductance scale
   p_cell->CONSTANTS[gcal] *= gcal_scale;
   p_cell->CONSTANTS[gcat] *= gcat_scale;

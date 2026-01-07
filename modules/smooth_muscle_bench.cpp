@@ -108,7 +108,7 @@ int smooth_muscle_bench(const Parameter *p_param)
   }
   
   fprintf(fp_time_series,"%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
-      "Time(ms)","v(mV)","dv/dt(mV/ms)","cai(mM)","Ist(mV)",
+      "Time(ms)","v(mV)","dv/dt(mV/ms)","cai(mM)","Ist(pA_per_pF)",
       "ical(pA_per_pF)","ina(pA_per_pF)","icat(pA_per_pF)","ih(pA_per_pF)",
       "ik1(pA_per_pF)","ik2(pA_per_pF)","ika(pA_per_pF)","iBKa(pA_per_pF)","iBKab(pA_per_pF)",
       "ib(pA_per_pF)","insna(pA_per_pF)","insca(pA_per_pF)","insk(pA_per_pF)");
